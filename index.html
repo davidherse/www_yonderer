@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yonderer — The right experiences, with confidence</title>
+  <meta name="description" content="Yonderer learns what you love and matches you with places, events, and experiences you'll actually enjoy. Not more options — better ones.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; color: inherit; }
+    button, input { font: inherit; border: none; outline: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ===== TOKENS ===== */
+    :root {
+      --purple: #584584;
+      --purple-light: #7A6BA0;
+      --purple-bg: #F5F0FA;
+      --orange: #ED603B;
+      --orange-hover: #d4532f;
+      --text-primary: #2D2D2D;
+      --text-secondary: #5A5A5A;
+      --text-light: #939597;
+      --white: #FFFFFF;
+      --off-white: #F7F7F5;
+      --border: #E0E0E0;
+      --border-light: #F0F0F0;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    /* ===== BASE ===== */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: var(--text-primary);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo img {
+      height: 40px;
+      width: auto;
+    }
+
+    .nav-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .nav-badge:hover {
+      background: var(--orange-hover);
+      transform: translateY(-1px);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .hero-tagline {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8), 0 0 12px rgba(0,0,0,0.6);
+    }
+
+    /* ===== SUBHEAD ===== */
+    .subhead {
+      text-align: center;
+      padding: 2rem 0 0.5rem;
+    }
+
+    .subhead-text {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .subhead-text strong {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* ===== FEATURES ===== */
+    .features {
+      padding: 1.5rem 0 4rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      text-align: center;
+      padding: 2rem 1.25rem;
+      background: var(--off-white);
+      border-radius: 16px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: var(--purple-bg);
+    }
+
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--purple);
+    }
+
+    .feature-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .feature-text {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+      padding: 3rem 0 4rem;
+      text-align: center;
+    }
+
+    .cta-card {
+      background: var(--off-white);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+    }
+
+    .cta-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .cta-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      max-width: 400px;
+      margin: 0 auto 1rem;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 0.625rem;
+    }
+
+    .cta-input {
+      flex: 1;
+      padding: 0.875rem 1.25rem;
+      border: 2px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.9375rem;
+      background: var(--white);
+      transition: border-color 0.15s ease;
+    }
+
+    .cta-input:focus {
+      border-color: var(--purple);
+    }
+
+    .cta-input::placeholder {
+      color: var(--text-light);
+    }
+
+    .cta-btn {
+      padding: 0.875rem 1.75rem;
+      border-radius: 999px;
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.9375rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .cta-btn:hover {
+      background: var(--orange-hover);
+      transform: translateY(-1px);
+    }
+
+    .cta-trust {
+      font-size: 0.8125rem;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .cta-success {
+      display: none;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--purple);
+    }
+
+    /* ===== GOOGLE PLACES AUTOCOMPLETE ===== */
+    .pac-container {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      margin-top: 4px;
+      font-family: var(--font-body);
+    }
+
+    .pac-item {
+      padding: 0.625rem 1rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+
+    .pac-item:hover {
+      background: var(--purple-bg);
+    }
+
+    .pac-item-query {
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border-light);
+      text-align: center;
+    }
+
+    .footer-logo img {
+      height: 32px;
+      width: auto;
+      margin: 0 auto 0.75rem;
+      opacity: 0.5;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .hero-image {
+        height: 300px;
+      }
+
+      .hero-tagline {
+        font-size: 2.5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .feature-card {
+        padding: 1.5rem 1.25rem;
+        text-align: left;
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
+      .feature-icon {
+        margin: 0;
+        flex-shrink: 0;
+      }
+
+      .cta-card {
+        padding: 2rem 1.25rem;
+      }
+
+      .cta-row {
+        flex-direction: column;
+      }
+
+      .cta-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="logo.png" alt="Yonderer">
+      </a>
+      <a href="#early-access" class="nav-badge">Sign up for access</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img class="hero-image" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1400&fit=crop&q=80" alt="">
+    <div class="hero-content">
+      <h1 class="hero-tagline">Your next favourite experience.</h1>
+    </div>
+  </section>
+
+  <!-- Subhead -->
+  <section class="subhead">
+    <div class="container">
+      <p class="subhead-text">
+        <strong>Yonderer</strong> learns what you love and matches you with places, events, and experiences you'll actually enjoy. Fewer options, better alignment.
+      </p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container">
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M10 2l1.5 4.5L16 8l-4.5 1.5L10 14l-1.5-4.5L4 8l4.5-1.5L10 2zm7 7l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3zm-3 9l.75 2.25L17 21l-2.25.75L14 24l-.75-2.25L11 21l2.25-.75L14 18z"/></svg>
+          </div>
+          <div>
+            <h3 class="feature-title">Learns Your Taste</h3>
+            <p class="feature-text">Yonderer builds a living map of what you love — not star ratings, but real signals from your experiences. The more you explore, the sharper it gets.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          </div>
+          <div>
+            <h3 class="feature-title">Trusted Recommendations</h3>
+            <p class="feature-text">Curated by locals, organisations, and creators who know these places first-hand. Real insight that gives you confidence to try something new.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+          </div>
+          <div>
+            <h3 class="feature-title">Right Place, Right Moment</h3>
+            <p class="feature-text">Yonderer surfaces experiences that match your taste, your mood, and your moment — not just what's nearby or what's popular.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="early-access">
+    <div class="container">
+      <div class="cta-card">
+        <h2 class="cta-title">Get early access</h2>
+        <p class="cta-subtitle">Be the first to explore when we launch near you.</p>
+        <form id="earlyAccessForm" class="cta-form" action="https://formspree.io/f/mykdoeoj" method="POST">
+          <div class="cta-row">
+            <input type="text" name="name" class="cta-input" placeholder="Your name" required>
+            <input type="text" name="location" id="locationInput" class="cta-input" placeholder="City or suburb" required autocomplete="off">
+          </div>
+          <input type="email" name="email" class="cta-input" placeholder="Your email address" required>
+          <button type="submit" class="cta-btn">Notify me</button>
+        </form>
+        <p class="cta-trust" id="ctaTrust">No spam. We'll only email you when we launch.</p>
+        <p class="cta-success" id="ctaSuccess">You're on the list! We'll be in touch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <a href="/" class="footer-logo">
+        <img src="logo.png" alt="Yonderer">
+      </a>
+      <p class="footer-copy">&copy; 2026 Yonderer. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('earlyAccessForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = this;
+      var btn = form.querySelector('.cta-btn');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(res) {
+        if (res.ok) {
+          form.style.display = 'none';
+          document.getElementById('ctaTrust').style.display = 'none';
+          document.getElementById('ctaSuccess').style.display = 'block';
+        } else {
+          btn.textContent = 'Notify me';
+          btn.disabled = false;
+          alert('Something went wrong. Please try again.');
+        }
+      }).catch(function() {
+        btn.textContent = 'Notify me';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again.');
+      });
+    });
+  </script>
+
+  <!-- Google Places Autocomplete -->
+  <script>
+    function initAutocomplete() {
+      var input = document.getElementById('locationInput');
+      var autocomplete = new google.maps.places.Autocomplete(input, {
+        types: ['(cities)'],
+        fields: ['formatted_address', 'name']
+      });
+      autocomplete.addListener('place_changed', function() {
+        var place = autocomplete.getPlace();
+        if (place && place.name) {
+          input.value = place.name;
+        }
+      });
+    }
+  </script>
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA240aqqRSYmLFKs4MB_YqqUOr7pTa9QdI&libraries=places&callback=initAutocomplete"></script>
+</body>
+</html>
